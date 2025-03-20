@@ -219,3 +219,29 @@ while (totalEmpHrs4 <= MAX_HRS_IN_MONTH && totalWorkingDays3 < NUM_OF_WORKING_DA
     });
 }
 console.log("UC10 - Showing Daily Hours Worked and Wage Earned: " + empDailyHrsAndWageArr);
+
+// UC11: Perform Object Operations using Helper Functions
+
+// UC11A: Calculate total Wage and total hours worked
+let totalWages2 = empDailyHrsAndWageArr
+    .filter(dailyHrsAndWage => dailyHrsAndWage.dailyWage > 0)
+    .reduce((totalWage, dailyHrsAndWage) => totalWage += dailyHrsAndWage.dailyWage, 0);
+let totalHours1 = empDailyHrsAndWageArr
+    .filter(dailyHrsAndWage => dailyHrsAndWage.dailyWage > 0)
+    .reduce((totalHours, dailyHrsAndWage) => totalHours += dailyHrsAndWage.dailyHours, 0);
+console.log("UC11A - Total Hours: " + totalHours1 + " Total Wages: " + totalWages2);
+
+
+// UC11B: Show the full working days, part working days and non working days
+console.log("UC11B - Logging Full Working Days");
+empDailyHrsAndWageArr.filter(dailyHrsAndWage => dailyHrsAndWage.dailyHours == 8)
+    .forEach(dailyHrsAndWage => process.stdout.write(dailyHrsAndWage.toString()));
+    let partWorkingDays1 = empDailyHrsAndWageArr
+    .filter(dailyHrsAndWage => dailyHrsAndWage.dailyHours == 4)
+    .map(dailyHrsAndWage => dailyHrsAndWage.toString());
+console.log("\n\nUC11B - Part Working Days: " + partWorkingDays1);
+let nonWorkingDays1 = empDailyHrsAndWageArr
+    .filter(dailyHrsAndWage => dailyHrsAndWage.dailyHours == 0)
+    .map(dailyHrsAndWage => dailyHrsAndWage.dayNum);
+console.log("UC11B - Non Working Days: " + nonWorkingDays1);
+
