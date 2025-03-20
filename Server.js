@@ -282,3 +282,4 @@ employeePayrollData.name = "john";
 console.log(employeePayrollData.toString());
 let newEmployeePayrollData = new EmployeePayrollData(1, "Terrisa", 30000, "F", new Date());
 console.log(newEmployeePayrollData.toString());
+
