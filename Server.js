@@ -327,3 +327,49 @@ catch (e) {
 }
 let newEmployeePayrollData1 = new EmployeePayrollData1(1, "Terrisa", 30000, "F", new Date());
 console.log(newEmployeePayrollData1.toString());
+
+// UC14: Ability to check the employee id and salary are non zero positive number, the gender is M or F and date is not a future date - Use Regex Pattern - Use Try Catch in case of Error
+class EmployeePayrollData2 {
+    id;
+    salary;
+    gender;
+    startDate;
+
+    // constructor
+    constructor(...params) {
+        this.id = params[0];
+        this.name = params[1];
+        this.salary = params[2];
+        this.startDate = params[3];
+        this.gender = params[4];
+    }
+
+    //getter and setter method
+    get name() { return this._name; }
+    set name(name) {
+        let nameRegex = RegExp('^[A-Z]{1}[a-z]{3,}$');
+        if (nameRegex.test(name))
+            this._name = name;
+        else throw 'Name is Incorrect!';
+    }
+
+    //method
+    toString() {
+        const options = { year: 'numeric', month: 'long', day: 'numeric' };
+        const empDate = this.startDate === undefined ? "undefined" :
+            this.startDate.toLocaleDateString("en-US", options);
+        return "id=" + this.id + ", name=" + this.name + ", salary=" + this.salary + ", " + "gender=" + this.gender + ", startDate=" + empDate;
+    }
+}
+
+let employeePayrollData2 = new EmployeePayrollData2(1, "Mark", 30000, new Date(), "M");
+console.log(employeePayrollData2.toString());
+try {
+    employeePayrollData2.name = "john";
+    console.log(employeePayrollData2.toString());
+}
+catch (e) {
+    console.error(e);
+}
+let newEmployeePayrollData2 = new EmployeePayrollData2(1, "Terrisa", 30000, new Date(), "F");
+console.log(newEmployeePayrollData2.toString());
